@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#181d19">
+	<title>RBMK-1000 · 圆形堆芯模型</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js",
+				"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/"
+			}
+		}
+	</script>
+</head>
+<body>
+	<main id="viewport">
+		<canvas id="model" aria-label="RBMK 圆形石墨堆芯三维结构模型"></canvas>
+		<header class="topbar">
+			<div class="brand">
+				<div class="brand-stamp"><span>4</span></div>
+				<div class="brand-copy"><span class="brand-title">AZ3 · 一号机组</span><span class="brand-sub">RBMK-1000 / CORE STRUCTURE</span></div>
+			</div>
+			<div class="archive"><b>结构档案</b>　2035 / G·T·I</div>
+		</header>
+		<section class="intro" aria-label="模型说明">
+			<div class="eyebrow">三维结构模型 / 01</div>
+			<h1>圆形石墨堆芯</h1>
+			<p>单击格块查看独立编号。拖动旋转模型，滚轮缩放。</p>
+		</section>
+		<div class="style-picker" role="group" aria-label="方格颜色样式">
+			<div class="style-label">方格样式</div>
+			<div class="style-options">
+				<button class="style-button" type="button" data-style="uniform" aria-pressed="false">统一灰</button>
+				<button class="style-button" type="button" data-style="current" aria-pressed="true">当前样式</button>
+				<button class="style-button" type="button" data-style="radial" aria-pressed="false">同心渐变</button>
+			</div>
+		</div>
+		<section class="music-panel" aria-label="音乐节拍同步">
+			<div class="music-heading"><span>SPECTRUM SYNC</span><span class="music-status" id="musicStatus">未载入音乐</span></div>
+			<div class="music-actions">
+				<input id="musicFile" type="file" accept="audio/*" hidden>
+				<button class="music-button" id="chooseMusic" type="button">选择音乐</button>
+				<button class="music-button" id="toggleMusic" type="button" disabled>播放</button>
+
+                <button class="music-button" id="toggleDeviceAudio" type="button">
+                    设备音频
+                </button>
+			</div>
+			<div class="music-meter" role="meter" aria-label="当前音频映射位移"><span class="music-meter-fill" id="musicMeterFill"></span></div>
+			<audio id="musicAudio" preload="metadata"></audio>
+		</section>
+		<!-- 格点定位表单：编号格式为 C列号-R行号，例如 C19-R20。 -->
+		<form class="cell-search" id="cellSearch" role="search">
+			<!-- for 必须与输入框的 id 一致，点击文字标签时会聚焦到输入框。 -->
+			<label for="cellSearchInput">格点编号</label>
+			<!-- type=search 提供搜索语义；autocomplete/spellcheck 关闭浏览器联想和拼写修正，避免改写编号。 -->
+			<input id="cellSearchInput" type="search" placeholder="C19-R20" autocomplete="off" spellcheck="false" aria-label="输入格点编号">
+			<!-- submit 会触发表单的 submit 事件；具体编号查找由下方 JavaScript 处理。 -->
+			<button type="submit">定位</button>
+		</form>
+		<div class="corner-code"><strong>RBMK / 1000</strong><br>PRESSURE-CHANNEL REACTOR<br>SCHEMATIC MODEL</div>
+		<div class="legend" aria-label="模型图例">
+            <div class="legend-title">CORE ELEMENTS</div>
+            <div class="legend-item">
+                <i class="swatch graphite"></i>
+                反应管
+            </div>
+
+            <div class="legend-item">
+                <i class="swatch control"></i>
+                控制棒
+            </div>
+
+            <div class="legend-item">
+                <i class="swatch neutron"></i>
+                中子监控器
+            </div>
+
+            <div class="legend-item">
+                <i class="swatch short"></i>
+                短控制棒
+            </div>
+
+            <div class="legend-item">
+                <i class="swatch automatic"></i>
+                自动控制棒
+            </div>
+
+        </div>
+		<div class="hint" id="selectionHint">尚未选中格点 · 单击格块查看编号</div>
+		<section class="tuner-panel collapsed" id="tunerPanel" aria-label="参数调节">
+			<div class="tuner-heading"><span>TUNER</span><button class="tuner-collapse" id="tunerReset" type="button">恢复初始</button><button class="tuner-collapse" id="tunerCollapse" type="button">展开</button></div>
+			<div class="tuner-body" id="tunerBody"></div>
+		</section>
+		<nav class="view-actions" aria-label="模型视角">
+            <button class="view-button" id="stopJump" type="button">停止跳跃</button>
+			<button class="view-button" id="topView" type="button">俯视</button>
+			<button class="view-button" id="resetView" type="button">复位视角</button>
+		</nav>
+		<div class="loading" id="loading">正在载入三维模型</div>
+	</main>
+	<script type="module" src="script.js"></script>
+</body>
+</html>
