@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
+:root {
+    color-scheme: dark;
+    /* —— 基础文字 / 强调 —— */
+    --paper: #e3e3d7;
+    --muted: #90988c;
+    --line: #4b544a;
+    --lime: #c6d178;
+    /* —— 背景 —— */
+    --bg-base: #181d19;
+    --bg-viewport-0: #333431;
+    --bg-viewport-1: #232422;
+    --bg-viewport-2: #191a19;
+    --bg-topbar-0: #151a17ed;
+    --bg-topbar-1: #151a17a6;
+    /* —— 边框 / 分隔线 —— */
+    --border-topbar: #d9e0cd22;
+    --border-style-btn: #62695d;
+    --border-panel: #77816f88;
+    --border-input: #596253;
+    --border-btn: #68735e;
+    --border-swatch: #ffffff40;
+    /* —— 控件底色 —— */
+    --bg-style-btn: #1b211de8;
+    --bg-style-btn-hover: #292e28;
+    --bg-style-btn-active: #c6d17820;
+    --bg-view-btn: #1b211dbb;
+    --bg-view-btn-hover: #242c24;
+    --bg-panel: #1b211de8;
+    --bg-input: #111612;
+    --bg-btn: #30382c;
+    --bg-btn-hover: #3a4434;
+    --bg-meter: #414941;
+    /* —— 文本辅助色 —— */
+    --text-intro: #aab0a4;
+    --text-style-btn: #aeb5a8;
+    --text-view-btn: #c5cabb;
+    --text-legend: #bcc2b4;
+    --text-hint: #92998d;
+    --text-corner: #838b7f;
+    --text-corner-strong: #c1c6b8;
+    --text-placeholder: #778073;
+    --text-label: #aeb5a8;
+    /* —— 图例色块 —— */
+    --swatch-graphite: #858680;
+    --swatch-control: #5F7F55;
+    --swatch-neutron: #527A91;
+    --swatch-short: #A68A3A;
+    --swatch-automatic: #8F4C48;
+    --mono: "IBM Plex Mono", "Cascadia Code", monospace;
+    --sans: "Manrope", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: var(--bg-base); color: var(--paper); font-family: var(--sans); }
+button { color: inherit; font: inherit; }
+#viewport { position: fixed; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 51% 49%, var(--bg-viewport-0) 0, var(--bg-viewport-1) 45%, var(--bg-viewport-2) 100%); }
+#model { display: block; width: 100%; height: 100%; touch-action: none; outline: none; }
+.topbar { position: absolute; z-index: 2; inset: 0 0 auto; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; border-bottom: 1px solid var(--border-topbar); background: linear-gradient(180deg, var(--bg-topbar-0), var(--bg-topbar-1)); pointer-events: none; }
+.brand, .archive, .view-actions { pointer-events: auto; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-stamp { width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--lime); color: var(--lime); font: 600 13px var(--mono); transform: rotate(45deg); }
+.brand-stamp span { transform: rotate(-45deg); }
+.brand-copy { display: grid; gap: 3px; }
+.brand-title { font-size: 12px; font-weight: 700; }
+.brand-sub, .archive, .eyebrow, .code, .legend, .hint, .view-button { font-family: var(--mono); }
+.brand-sub { color: var(--muted); font-size: 9px; letter-spacing: 1.1px; }
+.archive { color: var(--muted); font-size: 9px; letter-spacing: .7px; }
+.archive b { color: var(--lime); font-weight: 500; }
+.intro { position: absolute; z-index: 1; top: 112px; left: 32px; width: 235px; padding-left: 14px; border-left: 1px solid var(--lime); pointer-events: none; }
+.eyebrow { color: var(--lime); font-size: 9px; letter-spacing: 1.1px; }
+h1 { margin: 11px 0 8px; font-size: 21px; line-height: 1.32; font-weight: 600; }
+.intro p { margin: 0; color: var(--text-intro); font-size: 10px; line-height: 1.8; }
+.style-picker { position: absolute; z-index: 2; top: 244px; left: 32px; display: grid; gap: 7px; }
+.style-label { color: var(--muted); font: 8px var(--mono); letter-spacing: .8px; }
+.style-options { display: flex; }
+.style-button { min-height: 31px; padding: 0 10px; border: 1px solid var(--border-style-btn); border-right: 0; background: var(--bg-style-btn); color: var(--text-style-btn); font: 9px var(--mono); cursor: pointer; }
+.style-button:last-child { border-right: 1px solid var(--border-style-btn); }
+.style-button:hover { color: var(--paper); background: var(--bg-style-btn-hover); }
+.style-button[aria-pressed="true"] { border-color: var(--lime); background: var(--bg-style-btn-active); color: var(--lime); }
+.view-actions { position: absolute; z-index: 2; top: 87px; right: 28px; display: flex; gap: 7px; }
+.view-button { min-height: 32px; padding: 0 11px; border: 1px solid var(--border-panel); background: var(--bg-view-btn); color: var(--text-view-btn); font-size: 9px; cursor: pointer; transition: border-color .18s, color .18s, background .18s; }
+.view-button:hover { border-color: var(--lime); color: var(--lime); background: var(--bg-view-btn-hover); }
+.legend { position: absolute; z-index: 1; left: 32px; bottom: 29px; display: grid; gap: 10px; color: var(--text-legend); font-size: 9px; pointer-events: none; }
+.legend-title { margin-bottom: 1px; color: var(--muted); font-size: 8px; letter-spacing: 1px; }
+.legend-item { display: flex; align-items: center; gap: 9px; }
+.swatch { width: 12px; height: 12px; border: 1px solid var(--border-swatch); }
+.swatch.graphite { background: var(--swatch-graphite); }
+.swatch.control { background: var(--swatch-control); }
+.swatch.neutron { background: var(--swatch-neutron); }
+.swatch.short { background: var(--swatch-short); }
+.swatch.automatic { background: var(--swatch-automatic); }
+.hint { position: absolute; z-index: 1; right: 29px; bottom: 30px; color: var(--text-hint); font-size: 8px; letter-spacing: .3px; pointer-events: none; }
+.corner-code { position: absolute; z-index: 1; right: 30px; top: 184px; color: var(--text-corner); font: 8px/1.8 var(--mono); text-align: right; pointer-events: none; }
+.corner-code strong { color: var(--text-corner-strong); font-weight: 400; }
+/* 格点搜索框固定在画布右上方；三列依次放标签、输入框和提交按钮。 */
+.cell-search { position: absolute; z-index: 2; top: 126px; right: 28px; display: grid; grid-template-columns: auto 132px auto; align-items: center; gap: 7px; padding: 8px; border: 1px solid var(--border-panel); background: var(--bg-panel); }
+.cell-search label { color: var(--text-label); font: 8px var(--mono); white-space: nowrap; }
+.cell-search input { width: 132px; min-width: 0; height: 27px; padding: 0 7px; border: 1px solid var(--border-input); outline: none; background: var(--bg-input); color: var(--paper); font: 9px var(--mono); text-transform: uppercase; }
+.cell-search input:focus { border-color: var(--lime); }
+.cell-search input::placeholder { color: var(--text-placeholder); }
+.cell-search button { height: 27px; padding: 0 9px; border: 1px solid var(--border-btn); background: var(--bg-btn); color: var(--lime); font: 8px var(--mono); cursor: pointer; }
+.cell-search button:hover { background: var(--bg-btn-hover); }
+.music-panel { position: absolute; z-index: 2; top: 244px; right: 28px; width: 230px; display: grid; gap: 8px; padding: 10px; border: 1px solid var(--border-panel); background: var(--bg-panel); }
+.music-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--muted); font: 8px var(--mono); letter-spacing: .6px; }
+.music-status { overflow: hidden; color: var(--text-corner-strong); letter-spacing: 0; text-overflow: ellipsis; white-space: nowrap; }
+.music-actions { display: flex; gap: 7px; }
+.music-meter { height: 3px; overflow: hidden; background: var(--bg-meter); }
+.music-meter-fill { display: block; width: 0; height: 100%; background: var(--lime); transition: width .08s linear; }
+.music-button { min-height: 29px; padding: 0 10px; border: 1px solid var(--border-btn); background: var(--bg-btn); color: var(--lime); font: 8px var(--mono); cursor: pointer; }
+.music-button:hover:not(:disabled) { background: var(--bg-btn-hover); }
+.music-button:disabled { cursor: not-allowed; opacity: .45; }
+/* 参数调节面板：固定在右下方，可折叠，滑块过多时内部滚动。 */
+.tuner-panel { position: absolute; z-index: 2; right: 28px; bottom: 29px; width: 232px; display: grid; gap: 8px; padding: 10px; border: 1px solid var(--border-panel); background: var(--bg-panel); }
+.tuner-heading { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font: 8px var(--mono); letter-spacing: .6px; }
+.tuner-collapse { border: 1px solid var(--border-btn); background: var(--bg-btn); color: var(--lime); font: 8px var(--mono); cursor: pointer; padding: 3px 8px; }
+.tuner-body { display: grid; gap: 7px; max-height: 300px; overflow-y: auto; padding-right: 2px; }
+.tuner-panel.collapsed .tuner-body { display: none; }
+.tuner-item { display: grid; gap: 2px; }
+.tuner-item-head { display: flex; justify-content: space-between; color: var(--text-label); font: 8px var(--mono); }
+.tuner-item output { color: var(--lime); }
+.tuner-item input[type="range"] { width: 100%; height: 12px; margin: 0; accent-color: var(--lime); }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--lime); font: 10px var(--mono); letter-spacing: 1px; pointer-events: none; }
+.loading[hidden] { display: none; }
+/* ============================================================================
+   手机适配（≤700px）：
+   - 顶栏压缩，隐藏副标题与档案文字
+   - 左上说明文字缩小、上移
+   - 右上视角按钮改为竖排，避免与搜索框重叠
+   - 搜索框、音乐面板、样式选择器收窄
+   - 图例移到底部横排，参数面板保持折叠、加宽触控区
+   ============================================================================ */
+@media (max-width: 700px) {
+    .topbar { height: 54px; padding: 0 14px; }
+    .brand { gap: 10px; }
+    .brand-stamp { width: 26px; height: 26px; font-size: 11px; }
+    .brand-title { font-size: 11px; }
+    .brand-sub, .archive { display: none; }
+
+    .intro { top: 66px; left: 14px; width: 170px; padding-left: 10px; }
+    h1 { margin: 6px 0 4px; font-size: 16px; }
+    .intro p { font-size: 9px; line-height: 1.6; }
+
+    .style-picker { top: 148px; left: 14px; gap: 5px; }
+    .style-button { min-height: 34px; padding: 0 9px; font-size: 9px; }
+
+    .view-actions { top: 66px; right: 12px; flex-direction: column; gap: 5px; }
+    .view-button { min-height: 34px; padding: 0 9px; font-size: 9px; text-align: center; }
+
+    .cell-search { top: 66px; right: 12px; display: none; }
+
+    .music-panel { top: auto; bottom: 110px; right: 12px; width: calc(100vw - 24px); max-width: 250px; }
+    .music-button { min-height: 34px; }
+
+    .corner-code { display: none; }
+
+    .legend { left: 14px; right: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px 12px; }
+    .legend-title { display: none; }
+
+    .hint { display: none; }
+
+    .tuner-panel { right: 12px; bottom: 34px; width: calc(100vw - 24px); max-width: 260px; }
+    .tuner-body { max-height: 240px; }
+    .tuner-collapse { min-height: 30px; padding: 3px 12px; font-size: 10px; }
+    .tuner-item input[type="range"] { height: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
